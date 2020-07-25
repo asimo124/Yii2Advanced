@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -70,6 +71,19 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        /*/
+        $user = new User();
+        $user->username = "alex";
+        $user->email = "alex@yahoo2.com";
+        $user->setPassword("clownfrog38#$");
+        $user->generateAuthKey();
+        $user->save(false);
+
+        echo "<Pre>";
+        echo "User added \n";
+        die();
+        //*/
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
