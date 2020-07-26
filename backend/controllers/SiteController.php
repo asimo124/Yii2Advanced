@@ -72,12 +72,17 @@ class SiteController extends Controller
     public function actionLogin()
     {
         /*/
+        $User = User::findOne(1);
+        $User->access_token = \Yii::$app->getSecurity()->generateRandomString();
+        $User->save();
+
         $user = new User();
         $user->username = "alex";
         $user->email = "alex@yahoo2.com";
         $user->setPassword("clownfrog38#$");
         $user->generateAuthKey();
         $user->save(false);
+        //*/
 
         echo "<Pre>";
         echo "User added \n";

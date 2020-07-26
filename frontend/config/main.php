@@ -15,12 +15,14 @@ $config = [
         'request' => [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
+                'multipart/form-data' => 'yii\web\MultipartFormDataParser'
             ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'enableSession' => false,
+            'loginUrl' => null,
+            'enableAutoLogin' => true
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
@@ -38,14 +40,42 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'request' => [
+            'enableCsrfValidation'=>true,
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'patient'],
+                /*[
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'patient'
+                ],*/
+                'auth/index' => 'auth/index',
             ],
-        ]
+        ],
+        'i18n' => [
+            'translations' => [
+                'conquer/oauth2' => [
+                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'basePath' => '@conquer/oauth2/messages',
+                ],
+            ],
+        ],
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'myserver' => [
+                    'class' => 'yii\authclient\OAuth2',
+                    'clientId' => 'advancedApi',
+                    'clientSecret' => '39472349jhf4075ur543RU0UL',
+                    'tokenUrl' => 'https://advancedapi.hawleywebdesign.com/auth/token',
+                    'authUrl' => 'https://advancedapi.hawleywebdesign.com/auth/index',
+                    'apiBaseUrl' => 'https://advancedapi.hawleywebdesign.com/api',
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];

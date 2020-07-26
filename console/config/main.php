@@ -6,6 +6,8 @@ $params = array_merge(
     require __DIR__ . '/params-local.php'
 );
 
+Yii::setAlias('@conquer/oauth2/migrations', '/var/www/yii2-advanced/vendor/conquer/oauth2/src/migrations');
+
 return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
@@ -19,7 +21,14 @@ return [
         'fixture' => [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
-          ],
+        ],
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => null,
+            'migrationNamespaces' => [
+                'conquer\oauth2\migrations',
+            ],
+        ],
     ],
     'components' => [
         'log' => [

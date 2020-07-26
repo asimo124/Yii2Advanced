@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use conquer\oauth2\OAuth2IdentityInterface;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -12,17 +13,18 @@ use yii\web\IdentityInterface;
  *
  * @property integer $id
  * @property string $username
+ * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $email
- * @property string $auth_key
+ * @property string $access_token
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface, OAuth2IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
@@ -58,6 +60,17 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = \Yii::$app->getSecurity()->generateRandomString();
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -67,11 +80,13 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $token
+     * @param null $type
+     * @return User|IdentityInterface|null
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['access_token' => $token]);
     }
 
     /**
@@ -83,6 +98,17 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findIdentityByUsername($username)
+    {
+        return static::findOne(['username' => $username]);
     }
 
     /**
