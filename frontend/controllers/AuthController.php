@@ -62,13 +62,31 @@ class AuthController extends \yii\web\Controller
     public function actionIndex()
     {
         $model = new LoginForm();
-        if ($model->load(\Yii::$app->request->post()) && $model->login()) {
+
+        $request = Yii::$app->request;
+
+        $login = [];
+        $login['LoginForm'] = [];
+        $login['LoginForm']['username'] = $request->get("username", "");
+        $login['LoginForm']['password'] = $request->get("password", "");
+
+        //*/
+        echo "<Pre>";
+        die(print_r($login, true));
+        //*/
+
+        if ($model->load($login) && $model->login()) {
+
             if ($this->isOauthRequest) {
                 $this->finishAuthorization();
             } else {
                 return $this->goBack();
             }
         } else {
+
+            echo "<Pre>";
+            die(print_r($model->getErrors(), true));
+
             return $this->render('index', [
                 'model' => $model,
             ]);

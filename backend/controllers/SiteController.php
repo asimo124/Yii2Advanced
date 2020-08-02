@@ -82,12 +82,12 @@ class SiteController extends Controller
         $user->setPassword("clownfrog38#$");
         $user->generateAuthKey();
         $user->save(false);
-        //*/
 
         echo "<Pre>";
         echo "User added \n";
         die();
         //*/
+
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
