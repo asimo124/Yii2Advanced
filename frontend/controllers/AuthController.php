@@ -70,7 +70,7 @@ class AuthController extends \yii\web\Controller
         $login['LoginForm']['username'] = $request->get("username", "");
         $login['LoginForm']['password'] = $request->get("password", "");
 
-        //*/
+        /*/
         echo "<Pre>";
         die(print_r($login, true));
         //*/
@@ -78,6 +78,7 @@ class AuthController extends \yii\web\Controller
         if ($model->load($login) && $model->login()) {
 
             if ($this->isOauthRequest) {
+
                 $this->finishAuthorization();
             } else {
                 return $this->goBack();

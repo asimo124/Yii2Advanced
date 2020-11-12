@@ -75,13 +75,21 @@ class SiteController extends Controller
         $User = User::findOne(1);
         $User->access_token = \Yii::$app->getSecurity()->generateRandomString();
         $User->save();
+        //*/
 
+        /*/
         $user = new User();
         $user->username = "alex";
         $user->email = "alex@yahoo2.com";
         $user->setPassword("clownfrog38#$");
         $user->generateAuthKey();
         $user->save(false);
+        //*/
+
+        /*/
+        $user = User::findOne(1);
+        $user->setPassword("Ghostman7");
+        $user->save();
 
         echo "<Pre>";
         echo "User added \n";
