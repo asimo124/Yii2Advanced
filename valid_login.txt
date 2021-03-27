@@ -1,1 +1,0 @@
-https://advancedapi.hawleywebdesign.com/auth/index?response_type=token&client_id=advancedApi&state=sg1A8Pg56yvfYpmhaT5dBOGTxtz8a0dqNKN5z5Hg&redirect_uri=http://advancedbackend.hawleywebdesign.com/site/login&scope&username=alex&password=clownfrog38%23%24
