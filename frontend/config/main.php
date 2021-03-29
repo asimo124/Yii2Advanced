@@ -52,7 +52,15 @@ $config = [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'patient'
                 ],*/
+                // Public homepage, and default route
+                '' => 'auth/guest',
+
+                // OAUTH2 ENDPOINTS
                 'auth/index' => 'auth/index',
+                'auth/token' => 'auth/token',
+                'auth' => 'auth/index',
+                'token' => 'auth/token',
+                'auth-as-user' => 'auth/auth-as-user',
             ],
         ],
         'i18n' => [

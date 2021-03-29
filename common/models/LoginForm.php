@@ -56,10 +56,30 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+
+            // if($this->getUser()->can('user')) {
+                // // create the cookie
+                // $cookies = Yii::$app->response->cookies;
+
+                // // add a new cookie to the response to be sent
+                // $cookies->add(new \yii\web\Cookie([
+                //     'name' => 'e2l-auth-key',
+                //     'value' => $this->getUser()->auth_key,
+                //     'expire' => time() + (3600 * 24 * 30)
+                // ]));
+
+                $serverNameParts = explode('.', $_SERVER['SERVER_NAME']);
+                $cookieDomain = $serverNameParts[count($serverNameParts)-2] . '.' . $serverNameParts[count($serverNameParts)-1];
+
+                setcookie('e2l-auth-key', $this->getUser()->auth_key, time() + (3600 * 24 * 30), '/', $cookieDomain, isset($_SERVER["HTTPS"]), true);
+
+                return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+
+            /*} else {
+                $this->addError('password', 'No user role');
+                return false;
+            }*/
         }
-        
-        return false;
     }
 
     /**

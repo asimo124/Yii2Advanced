@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use common\components\CustomAuthorizeFilter;
+use common\models\User;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -29,7 +31,7 @@ class AuthController extends \yii\web\Controller
              * you can do additional steps, such as third party oauth authorization (Facebook, Google ...)
              */
             'oauth2Auth' => [
-                'class' => \conquer\oauth2\AuthorizeFilter::className(),
+                'class' => CustomAuthorizeFilter::className(),
                 'only' => ['index'],
             ],
         ];
@@ -47,12 +49,10 @@ class AuthController extends \yii\web\Controller
              * OPTIONAL
              * Third party oauth providers also can be used.
              */
-            /*/
             'back' => [
                 'class' => \yii\authclient\AuthAction::className(),
                 'successCallback' => [$this, 'successCallback'],
             ],
-            //*/
         ];
     }
     /**
@@ -63,20 +63,37 @@ class AuthController extends \yii\web\Controller
     {
         $model = new LoginForm();
 
-        $request = Yii::$app->request;
+        $getRequest = Yii::$app->request->get();
+        if(!empty($getRequest['response_type']) && !empty($getRequest['prompt']) && $getRequest['prompt'] == 'none') {
 
-        $login = [];
-        $login['LoginForm'] = [];
-        $login['LoginForm']['username'] = $request->get("username", "");
-        $login['LoginForm']['password'] = $request->get("password", "");
+            // refresh token attempt
+            if ($this->isOauthRequest) {
 
-        /*/
-        echo "<Pre>";
-        die(print_r($login, true));
-        //*/
+                //*/
+                $cookies = Yii::$app->request->cookies;
+                $authKey = isset($_COOKIE['e2l-auth-key']) ? $_COOKIE['e2l-auth-key'] : "";
+                if (is_string($authKey) && !empty($authKey)) {
 
-        if ($model->load($login) && $model->login()) {
+                    $identity = User::findIdentityByAuthkey($authKey);
+                    if($identity) {
+                        Yii::$app->user->login($identity, 3600 * 24 * 30);
+                        $elog = new \common\models\EventLog();
+                        $elog->event = 'userRefreshLogin';
+                        $elog->save();
+                        $this->finishAuthorization();
+                        return;
+                    }
 
+                }
+
+            }
+
+            $this->finishAuthorization();
+            return;
+
+        }
+
+        if ($model->load(\Yii::$app->request->post()) && $model->login()) {
             if ($this->isOauthRequest) {
 
                 $this->finishAuthorization();
@@ -84,12 +101,8 @@ class AuthController extends \yii\web\Controller
                 return $this->goBack();
             }
         } else {
-
-            echo "<Pre>";
-            die(print_r($model->getErrors(), true));
-
             return $this->render('index', [
-                'model' => $model,
+                'loginFormModel' => $model,
             ]);
         }
     }
