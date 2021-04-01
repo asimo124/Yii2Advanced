@@ -183,6 +183,17 @@ class User extends ActiveRecord implements IdentityInterface, OAuth2IdentityInte
         return $this->getAuthKey() === $authKey;
     }
 
+
+    /* for Basic Auth method */
+    public static function validateBasicAuth($username,$password)
+    {
+
+        $user = static::find()->where(['username' => $username])->one();
+        if ($user->validatePassword($password)) {
+            return $user;
+        }
+    }
+
     /**
      * Validates password
      *

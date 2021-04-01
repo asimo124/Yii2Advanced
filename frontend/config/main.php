@@ -61,6 +61,77 @@ $config = [
                 'auth' => 'auth/index',
                 'token' => 'auth/token',
                 'auth-as-user' => 'auth/auth-as-user',
+
+
+
+                'GET recipes' => 'ri-recipe/index',
+                'recipes' => 'api/options',
+
+                // Top Recipes
+                'GET top-recipes/top-recipes' => 'top-recipes/top-recipes',
+                'GET top-recipes/ingredients-by-price' => 'top-recipes/ingredients-by-price',
+                'POST top-recipes/shopping-list' => 'top-recipes/shopping-list',
+
+                'top-recipes' => 'api/options',
+                'top-recipes/ingredients-by-price' => 'api/options',
+                'top-recipes/shopping-list' => 'api/options',
+
+                // Home Inventory
+                'GET home-inventory-form/home-inventory' => 'home-inventory-form/home-inventory',
+                'POST home-inventory-form/remove-ingredient' => 'home-inventory-form/remove-ingredient',
+                'POST home-inventory-form/update-recipe-ingredients' => 'home-inventory-form/update-recipe-ingredients',
+
+                'home-inventory-form/home-inventory' => 'api/options',
+                'home-inventory-form/remove-ingredient' => 'api/options',
+                'home-inventory-form/update-recipe-ingredients' => 'api/options',
+
+                // Ingredients Form
+                'GET recipe-form/recipes' => 'recipe-form/recipes',
+                'GET recipe-form/ingredients' => 'recipe-form/ingredients',
+                'POST recipe-form/update-ingredient' => 'recipe-form/update-ingredient',
+                'POST recipe-form/add-ingredient' => 'recipe-form/add-ingredient',
+                'POST recipe-form/remove-ingredient-from-recipe' => 'recipe-form/remove-ingredient-from-recipe',
+                'POST recipe-form/update-recipe-ingredients' => 'recipe-form/update-recipe-ingredients',
+
+                'recipe-form/recipes' => 'api/options',
+                'recipe-form/ingredients' => 'api/options',
+                'recipe-form/update-ingredient' => 'api/options',
+                'recipe-form/add-ingredient' => 'api/options',
+                'recipe-form/remove-ingredient-from-recipe' => 'api/options',
+                'recipe-form/update-recipe-ingredients' => 'api/options',
+
+                // Recipe Form
+                'POST recipe-form/create' => 'recipe-form/create',
+                'POST recipe-form/update' => 'recipe-form/update',
+                'GET recipe-form/view' => 'recipe-form/view',
+                'GET recipe-form/proteins' => 'recipe-form/proteins',
+                'GET recipe-form/recipe-styles' => 'recipe-form/recipe-styles',
+                'GET recipe-form/taste-levels' => 'recipe-form/taste-levels',
+                'GET recipe-form/difficulty-levels' => 'recipe-form/difficulty-levels',
+
+                'recipe-form/create' => 'api/options',
+                'recipe-form/update' => 'api/options',
+                'recipe-form/view' => 'api/options',
+                'recipe-form/proteins' => 'api/options',
+                'recipe-form/recipe-styles' => 'api/options',
+                'recipe-form/difficulty-levels' => 'api/options',
+
+
+                /*/
+                'POST districts' => 'district/create',
+                'GET districts/<id:\d+>' => 'district/view',
+                'GET districts/<id:\d+>/subscriptions' => 'district/subscriptions',
+                'GET districts/<id:\d+>/support' => 'district/support',
+                'GET districts/<id:\d+>/timezone' => 'district/timezone',
+                'PUT,PATCH districts/<id:\d+>' => 'district/update',
+                'DELETE districts/<id:\d+>' => 'district/delete',
+                'districts/<id:\d+>' => 'api/options',
+                'districts/<id:\d+>/subscriptions' => 'api/options',
+                'districts/<id:\d+>/timezone' => 'api/options',
+                'districts' => 'api/options',
+                //*/
+
+
             ],
         ],
         'i18n' => [
