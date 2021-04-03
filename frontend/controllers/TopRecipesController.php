@@ -27,7 +27,7 @@ class TopRecipesController extends Controller
             'class' => AccessControl::className(),
             'rules' => [
                 [
-                    'actions' => ['top-recipes', 'ingredients-by-price'],
+                    'actions' => ['top-recipes', 'ingredients-by-price', 'shopping-list'],
                     'allow' => true,
                     'roles' => ['@', '?']
                 ],

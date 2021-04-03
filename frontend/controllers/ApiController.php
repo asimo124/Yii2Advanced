@@ -24,6 +24,7 @@ class ApiController extends Controller
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
+            /*/
             'class' => CompositeAuth::className(),
             'authMethods' => [
                 'basicAuth' => [
@@ -32,8 +33,13 @@ class ApiController extends Controller
                         return User::validateBasicAuth($username,$password);
                     },
                 ],
-                HttpBearerAuth::className()
+                'bearerAuth' => [
+                    'class' => HttpBearerAuth::className(),
+                ]
             ],
+            //*/
+            'class' => \yii\filters\auth\HttpBearerAuth::className(),
+
         ];
 
         // remove authentication filter to add CORS first

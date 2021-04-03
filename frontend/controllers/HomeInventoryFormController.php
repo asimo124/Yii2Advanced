@@ -2,15 +2,15 @@
 
 namespace frontend\controllers;
 
-use frontend\Item;
-use frontend\ItemUsedHistory;
-use frontend\RiDifficultyLevel;
-use frontend\RiHomeInventory;
-use frontend\RiIngredient;
-use frontend\RiIngredientType;
-use frontend\RiProtein;
-use frontend\RiRecipe;
-use frontend\RiRecipeIngredient;
+use frontend\models\Item;
+use frontend\models\ItemUsedHistory;
+use frontend\models\RiDifficultyLevel;
+use frontend\models\RiHomeInventory;
+use frontend\models\RiIngredient;
+use frontend\models\RiIngredientType;
+use frontend\models\RiProtein;
+use frontend\models\RiRecipe;
+use frontend\models\RiRecipeIngredient;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;

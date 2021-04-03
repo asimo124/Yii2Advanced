@@ -86,7 +86,15 @@ class User extends ActiveRecord implements IdentityInterface, OAuth2IdentityInte
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['access_token' => $token]);
+        if(!empty($token)) {
+            $user = User::find()
+                ->leftJoin('oauth2_access_token','`oauth2_access_token`.`user_id` = `user`.`id`')
+                ->where(['`oauth2_access_token`.`access_token`' => $token])
+                ->one();
+            return $user;
+        } else {
+            return false;
+        }
     }
 
     /**

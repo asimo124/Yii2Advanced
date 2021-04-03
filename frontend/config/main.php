@@ -69,10 +69,12 @@ $config = [
 
                 // Top Recipes
                 'GET top-recipes/top-recipes' => 'top-recipes/top-recipes',
+                'GET top-recipes/shopping-list' => 'top-recipes/shopping-list',
                 'GET top-recipes/ingredients-by-price' => 'top-recipes/ingredients-by-price',
                 'POST top-recipes/shopping-list' => 'top-recipes/shopping-list',
 
-                'top-recipes' => 'api/options',
+                'top-recipes/top-recipes' => 'api/options',
+                'top-recipes/shopping-list' => 'api/options',
                 'top-recipes/ingredients-by-price' => 'api/options',
                 'top-recipes/shopping-list' => 'api/options',
 
@@ -114,6 +116,7 @@ $config = [
                 'recipe-form/view' => 'api/options',
                 'recipe-form/proteins' => 'api/options',
                 'recipe-form/recipe-styles' => 'api/options',
+                'recipe-form/taste-levels' => 'api/options',
                 'recipe-form/difficulty-levels' => 'api/options',
 
 
@@ -151,7 +154,7 @@ $config = [
                     'clientSecret' => '39472349jhf4075ur543RU0UL',
                     'tokenUrl' => 'https://advancedapi.hawleywebdesign.com/auth/token',
                     'authUrl' => 'https://advancedapi.hawleywebdesign.com/auth/index',
-                    'apiBaseUrl' => 'https://advancedapi.hawleywebdesign.com/api',
+                    'apiBaseUrl' => 'https://advancedapi.hawleywebdesign.com/',
                 ],
             ],
         ],
@@ -166,7 +169,8 @@ if (YII_ENV_DEV) {
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         'allowedIPs' => ['127.0.0.1', '::1', '172.68.133.110', '172.68.132.61', '172.68.143.134', '172.68.132.115',
-            '172.69.22.238', '162.158.255.96', '172.68.132.229', '172.68.143.86', '172.68.189.243', '69.232.99.200'],
+            '172.69.22.238', '162.158.255.96', '172.68.132.229', '172.68.143.86', '172.68.189.243', '69.232.99.200',
+            '162.158.*.*'],
     ];
 
     $config['bootstrap'][] = 'gii';
@@ -175,7 +179,7 @@ if (YII_ENV_DEV) {
         // uncomment the following to add your IP if you are not connecting from localhost.
         'allowedIPs' => ['127.0.0.1', '::1', '172.68.133.110', '172.68.132.61', '172.69.23.107', '172.68.132.115',
             '172.68.143.86', '172.69.22.238', '162.158.255.96', '172.68.132.229', '172.68.143.86', '172.68.189.243',
-            '172.68.132.253', '69.232.99.200'],
+            '172.68.132.253', '69.232.99.200', '162.158.*.*'],
     ];
 }
 

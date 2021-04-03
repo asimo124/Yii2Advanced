@@ -42,6 +42,7 @@ class RecipeFormController extends ApiController
                         'remove-ingredient-from-recipe',
                         'update-recipe-ingredients',
                         'update',
+                        'create',
                         'view',
                         'proteins',
                         'recipe-styles',
