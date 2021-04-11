@@ -65,7 +65,7 @@ $config = [
 
 
                 'GET recipes' => 'ri-recipe/index',
-                'recipes' => 'api/options',
+                'recipes' => 'frontend/options',
 
                 // Top Recipes
                 'GET top-recipes/top-recipes' => 'top-recipes/top-recipes',
@@ -73,19 +73,19 @@ $config = [
                 'GET top-recipes/ingredients-by-price' => 'top-recipes/ingredients-by-price',
                 'POST top-recipes/shopping-list' => 'top-recipes/shopping-list',
 
-                'top-recipes/top-recipes' => 'api/options',
-                'top-recipes/shopping-list' => 'api/options',
-                'top-recipes/ingredients-by-price' => 'api/options',
-                'top-recipes/shopping-list' => 'api/options',
+                'top-recipes/top-recipes' => 'frontend/options',
+                'top-recipes/shopping-list' => 'frontend/options',
+                'top-recipes/ingredients-by-price' => 'frontend/options',
+                'top-recipes/shopping-list' => 'frontend/options',
 
                 // Home Inventory
                 'GET home-inventory-form/home-inventory' => 'home-inventory-form/home-inventory',
                 'POST home-inventory-form/remove-ingredient' => 'home-inventory-form/remove-ingredient',
                 'POST home-inventory-form/update-recipe-ingredients' => 'home-inventory-form/update-recipe-ingredients',
 
-                'home-inventory-form/home-inventory' => 'api/options',
-                'home-inventory-form/remove-ingredient' => 'api/options',
-                'home-inventory-form/update-recipe-ingredients' => 'api/options',
+                'home-inventory-form/home-inventory' => 'frontend/options',
+                'home-inventory-form/remove-ingredient' => 'frontend/options',
+                'home-inventory-form/update-recipe-ingredients' => 'frontend/options',
 
                 // Ingredients Form
                 'GET recipe-form/recipes' => 'recipe-form/recipes',
@@ -95,12 +95,12 @@ $config = [
                 'POST recipe-form/remove-ingredient-from-recipe' => 'recipe-form/remove-ingredient-from-recipe',
                 'POST recipe-form/update-recipe-ingredients' => 'recipe-form/update-recipe-ingredients',
 
-                'recipe-form/recipes' => 'api/options',
-                'recipe-form/ingredients' => 'api/options',
-                'recipe-form/update-ingredient' => 'api/options',
-                'recipe-form/add-ingredient' => 'api/options',
-                'recipe-form/remove-ingredient-from-recipe' => 'api/options',
-                'recipe-form/update-recipe-ingredients' => 'api/options',
+                'recipe-form/recipes' => 'frontend/options',
+                'recipe-form/ingredients' => 'frontend/options',
+                'recipe-form/update-ingredient' => 'frontend/options',
+                'recipe-form/add-ingredient' => 'frontend/options',
+                'recipe-form/remove-ingredient-from-recipe' => 'frontend/options',
+                'recipe-form/update-recipe-ingredients' => 'frontend/options',
 
                 // Recipe Form
                 'POST recipe-form/create' => 'recipe-form/create',
@@ -111,13 +111,13 @@ $config = [
                 'GET recipe-form/taste-levels' => 'recipe-form/taste-levels',
                 'GET recipe-form/difficulty-levels' => 'recipe-form/difficulty-levels',
 
-                'recipe-form/create' => 'api/options',
-                'recipe-form/update' => 'api/options',
-                'recipe-form/view' => 'api/options',
-                'recipe-form/proteins' => 'api/options',
-                'recipe-form/recipe-styles' => 'api/options',
-                'recipe-form/taste-levels' => 'api/options',
-                'recipe-form/difficulty-levels' => 'api/options',
+                'recipe-form/create' => 'frontend/options',
+                'recipe-form/update' => 'frontend/options',
+                'recipe-form/view' => 'frontend/options',
+                'recipe-form/proteins' => 'frontend/options',
+                'recipe-form/recipe-styles' => 'frontend/options',
+                'recipe-form/taste-levels' => 'frontend/options',
+                'recipe-form/difficulty-levels' => 'frontend/options',
 
 
                 /*/
@@ -128,10 +128,10 @@ $config = [
                 'GET districts/<id:\d+>/timezone' => 'district/timezone',
                 'PUT,PATCH districts/<id:\d+>' => 'district/update',
                 'DELETE districts/<id:\d+>' => 'district/delete',
-                'districts/<id:\d+>' => 'api/options',
-                'districts/<id:\d+>/subscriptions' => 'api/options',
-                'districts/<id:\d+>/timezone' => 'api/options',
-                'districts' => 'api/options',
+                'districts/<id:\d+>' => 'frontend/options',
+                'districts/<id:\d+>/subscriptions' => 'frontend/options',
+                'districts/<id:\d+>/timezone' => 'frontend/options',
+                'districts' => 'frontend/options',
                 //*/
 
 
@@ -145,6 +145,16 @@ $config = [
                 ],
             ],
         ],
+        /*/
+        'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+                'multipart/form-data' => 'yii\web\MultipartFormDataParser'
+            ],
+            'enableCookieValidation' => false,
+            'enableCsrfValidation' => false,
+        ],
+        //*/
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [
